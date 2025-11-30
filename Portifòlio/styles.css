@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  text-decoration: none;
 }
 /* Titulos */
 h1, h2, h3, h4, h5, h6 {
@@ -99,17 +100,29 @@ body {
    BOTÕES
 ============================== */
 .btn-primary {
-  padding: 10px 28px;
-  background: linear-gradient(90deg, var(--btn), #9a33ff);
+  padding: 12px 32px; 
+  background: linear-gradient(90deg, #6a00ff, #9a33ff); 
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 15px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 6px 30px rgba(122,0,255,0.22);
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.25s ease; 
+  box-shadow: 0 6px 20px rgba(122, 0, 255, 0.25);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(122,0,255,0.26); }
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(122, 0, 255, 0.35);
+}
+
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 15px rgba(122, 0, 255, 0.2);
+}
+
 
 .btn-outline {
   padding: 10px 26px;
@@ -121,6 +134,7 @@ body {
   font-size: 15px;
   transition: background 0.2s ease, transform 0.12s ease;
 }
+
 .btn-outline:hover { background: rgba(122,0,255,0.06); transform: translateY(-2px); }
 
 /* ==============================
