@@ -1,166 +1,109 @@
-// script.js
+// script.js - Otimizado para Victor Krieger Portfolio
 
-// Scroll reveal das seções (otimizado para performance)
+// Scroll reveal das seções (usando IntersectionObserver para performance)
 document.addEventListener("DOMContentLoaded", () => {
   const scrollElements = document.querySelectorAll(".scroll-reveal");
-  if (scrollElements.length === 0) return; // Evita processamento desnecessário se não houver elementos
+  if (scrollElements.length === 0) return;
 
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
-  };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target); // Para de observar após ativar
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
+  );
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target); // Para de observar após ativar, economizando recursos
-      }
-    });
-  }, observerOptions);
-
-  scrollElements.forEach(el => observer.observe(el));
+  scrollElements.forEach((el) => observer.observe(el));
 });
 
-// Fade-in sequencial navbar (executa ao carregar DOM)
+// Fade-in sequencial da navbar
 window.addEventListener("DOMContentLoaded", () => {
   const navItems = document.querySelectorAll(".nav-list li");
-  if (navItems.length === 0) return;
-
   navItems.forEach((item, index) => {
     item.style.animation = `navbarFadeIn 0.45s forwards`;
     item.style.animationDelay = `${0.12 * index}s`;
   });
 });
 
-// Menu hambúrguer (drawer) - Simplificado e com tratamento de erros
+// Menu hamburger (drawer mobile) - Simplificado
 (() => {
-  const html = document.documentElement;
   const hamburger = document.querySelector('.hamburger');
-  const navList = document.querySelector('#nav-list');
+  const drawer = document.querySelector('.drawer');
+  if (!hamburger || !drawer) return;
 
-  if (!hamburger || !navList) {
-    console.warn("Elementos do menu hambúrguer não encontrados. Verifique o HTML.");
-    return;
-  }
-
-  // Cria overlay se não existir
-  let overlay = document.querySelector('.overlay-dim');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'overlay-dim';
-    document.body.appendChild(overlay);
-  }
-
-  // Cria drawer se não existir
-  let drawer = document.querySelector('.drawer');
-  if (!drawer) {
-    drawer = document.createElement('nav');
-    drawer.className = 'drawer closed';
-    drawer.setAttribute('aria-hidden', 'true');
-    // Clona os links do nav-list
-    const clone = navList.cloneNode(true);
-    clone.classList.remove('nav-list');
-    clone.id = '';
-    // Remove animações duplicadas
-    clone.querySelectorAll('li').forEach(li => li.style.animation = '');
-    drawer.appendChild(clone);
-    document.body.appendChild(drawer);
-  }
-
-  // Estado inicial
-  drawer.classList.add('closed');
-  hamburger.setAttribute('aria-expanded', 'false');
-
-  // Funções para abrir/fechar
-  const openMenu = () => {
-    hamburger.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-    drawer.classList.remove('closed');
-    drawer.classList.add('open');
-    drawer.setAttribute('aria-hidden', 'false');
-    html.classList.add('nav-open');
-    overlay.style.opacity = '1';
-    overlay.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'hidden';
-    // Foco no primeiro link
-    const first = drawer.querySelector('a, button');
-    if (first) first.focus();
+  const toggleMenu = () => {
+    const isOpen = drawer.classList.contains('open');
+    hamburger.classList.toggle('active', !isOpen);
+    hamburger.setAttribute('aria-expanded', !isOpen);
+    drawer.classList.toggle('open', !isOpen);
+    drawer.classList.toggle('closed', isOpen);
+    drawer.setAttribute('aria-hidden', isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
   };
 
-  const closeMenu = () => {
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    drawer.classList.remove('open');
-    drawer.classList.add('closed');
-    drawer.setAttribute('aria-hidden', 'true');
-    html.classList.remove('nav-open');
-    overlay.style.opacity = '0';
-    overlay.style.pointerEvents = 'none';
-    document.body.style.overflow = '';
-    hamburger.focus();
-  };
+  hamburger.addEventListener('click', toggleMenu);
 
-  // Eventos
-  hamburger.addEventListener('click', () => {
-    if (drawer.classList.contains('open')) closeMenu();
-    else openMenu();
-  });
-
-  overlay.addEventListener('click', closeMenu);
-
-  // Fechar ao clicar em link/botão no drawer
+  // Fecha ao clicar em link ou fora
   drawer.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target.tagName === 'A' || (target.tagName === 'BUTTON' && target.closest('li'))) {
-      closeMenu();
-    }
+    if (e.target.tagName === 'A' || e.target.closest('li')) toggleMenu();
   });
 
-  // Esc para fechar
+  // Fecha com Esc
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer.classList.contains('open')) {
-      closeMenu();
-    }
+    if (e.key === 'Escape' && drawer.classList.contains('open')) toggleMenu();
   });
 
-  // Fechar se redimensionar para desktop
+  // Fecha se redimensionar para desktop
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 950 && drawer.classList.contains('open')) {
-      closeMenu();
-    }
+    if (window.innerWidth > 950 && drawer.classList.contains('open')) toggleMenu();
   });
 })();
 
-const typingElement = document.querySelector('.servi');
-const text = typingElement.dataset.text;
-let index = 0;
-
-function type() {
-  if(index < text.length) {
-    typingElement.textContent += text.charAt(index);
-    index++;
-    setTimeout(type, 100); // velocidade da digitação
-  }
-}
-
+// Efeito de digitação para ".servi"
 document.addEventListener("DOMContentLoaded", () => {
+  const element = document.querySelector('.servi');
+  if (!element) return;
+
+  const text = element.textContent;
+  element.textContent = '';
+  let index = 0;
+
+  const type = () => {
+    if (index < text.length) {
+      element.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, 100); // Velocidade da digitação
+    }
+  };
   type();
 });
 
+// Navegação suave para links internos
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 
+// Script WhatsApp (consolidado e validado)
 document.getElementById("btnWhatsApp").addEventListener("click", () => {
   const nome = document.getElementById("nome").value.trim();
   const mensagem = document.getElementById("mensagem").value.trim();
 
-  const numero = "5547989135878"; // <-- seu número AQUI
-
-  if (mensagem === "") {
+  if (!mensagem) {
     alert("Digite uma mensagem antes de enviar.");
     return;
   }
 
-  const textoFinal = `Olá, meu nome é ${nome || "Visitante"}.%0A%0A${mensagem}`;
-
-  window.open(`https://wa.me/${numero}?text=${textoFinal}`, "_blank");
+  const numero = "5547989135878";
+  const texto = `Olá, meu nome é ${nome || "Visitante"}.%0A%0A${mensagem}`;
+  window.open(`https://wa.me/${numero}?text=${texto}`, "_blank");
 });
