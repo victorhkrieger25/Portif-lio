@@ -147,3 +147,20 @@ function type() {
 document.addEventListener("DOMContentLoaded", () => {
   type();
 });
+
+
+document.getElementById("btnWhatsApp").addEventListener("click", () => {
+  const nome = document.getElementById("nome").value.trim();
+  const mensagem = document.getElementById("mensagem").value.trim();
+
+  const numero = "5547989135878"; // <-- seu número AQUI
+
+  if (mensagem === "") {
+    alert("Digite uma mensagem antes de enviar.");
+    return;
+  }
+
+  const textoFinal = `Olá, meu nome é ${nome || "Visitante"}.%0A%0A${mensagem}`;
+
+  window.open(`https://wa.me/${numero}?text=${textoFinal}`, "_blank");
+});
