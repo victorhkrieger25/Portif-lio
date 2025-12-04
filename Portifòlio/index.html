@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Victor Krieger • Web Designer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" href="img/website_10619907.png">
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Menu principal">
+      <div class="logo">Victor Krieger</div>
+      <button class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-list" id="nav-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+      <a href="#services" class="btn-primary nav-cta-desktop">Explorar</a>
+      <div class="drawer closed" id="mobile-drawer">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+        <div class="nav-cta-mobile">
+          <a href="#services" class="btn-primary">Explorar</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section id="home" class="hero scroll-reveal">
+      <div class="hero-text">
+        <h1 class="title">Transformo ideias<br>em <span>experiências digitais</span>.</h1>
+        <p class="description">Web Designer e Especialista em UX/UI. Desenvolvimento de interfaces modernas, responsivas e pensadas para gerar impacto real.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">Entre em Contato</a>
+          <a href="#portfolio" class="btn-outline">Portfólio</a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <img src="img/Design team-amico.png" alt="Ilustração de equipe de design colaborando em projetos digitais" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Sobre Mim -->
+    <section id="about" class="about scroll-reveal">
+      <div class="about-container">
+        <div class="about-image">
+          <img src="img/abstrato-de-lampada-criativa-em-ia-generativa-de-fundo-azul-brilhante.jpg" alt="Lâmpada criativa abstrata" class="about-img" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h2>Sobre mim</h2>
+          <p>Meu trabalho combina estética, estratégia e funcionalidade para criar interfaces que não apenas encantam, mas também solucionam problemas reais de forma eficiente. Cada projeto é desenvolvido com foco total no usuário, guiado por pesquisas, propósito e clareza, resultando em experiências digitais mais intuitivas, fluidas e significativas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Serviços -->
+    <div>
+      <h2 class="servi">Serviços</h2>
+      <section id="services" class="services-detailed scroll-reveal">
+        <div class="service-card">
+          <img src="img/conceito-de-negocio-com-holografia-grafica.jpg" alt="Análise digital sobre tablet" loading="lazy">
+          <h3>LANDING PAGES</h3>
+          <p>Após a reunião de brainstorming, elaboramos o orçamento com base nas ideias definidas e entregamos conforme solicitado.</p>
+        </div>
+        <div class="service-card">
+          <img src="img/computador-laptop-cinza-ligado.jpg" alt="Códigos representando desenvolvimento web" loading="lazy">
+          <h3>Criação dos projetos</h3>
+          <p>Projeto desenvolvido com códigos e ferramentas especializadas em desenvolvimento web.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Portfólio -->
+    <section id="portfolio" class="portfolio scroll-reveal">
+      <h2 class="portfolio-title">Portfólio</h2>
+      <div class="portfolio-grid">
+          <div class="portfolio-card">
+  <img src="img/IMG_7662.jpeg" alt="Landing page responsiva para Barbearia Black Barber" loading="lazy">
+  <p class="portfolio-desc">
+    Landing Page responsiva<br>
+    Barbearia Black Barber
+  </p>
+</div>
+        <div class="portfolio-card">
+  <img src="img/blackbarber.png" alt="Landing page responsiva para Barbearia Black Barber" loading="lazy">
+  <p class="portfolio-desc">
+    Landing Page responsiva<br>
+    Barbearia Black Barber
+  </p>
+</div>
+        <div class="portfolio-card">
+          <img src="img/storngedge.png" alt="StrongEdge Supplements mockup" loading="lazy">
+          <p class="portfolio-desc">Loja Virtual de Suplementos<br>StrongEdge Supplements</p>
+        </div>
+        <div class="portfolio-card">
+          <img src="img/desing-web.png" alt="Landing page moderna" loading="lazy">
+          <p class="portfolio-desc">Landing Page — Interações modernas e layout responsivo</p>
+        </div>
+        <div class="portfolio-card">
+          <img src="img/codigo.png" alt="Projeto feito em HTML, CSS e JS" loading="lazy">
+          <p class="portfolio-desc">Projeto virtual feito<br>inteiramente por códigos<br><strong>HTML, CSS e JavaScript</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="contact scroll-reveal">
+      <h2>Entre em Contato</h2>
+      <div class="contact-box">
+        <input type="text" id="nome" placeholder="Seu nome">
+        <textarea id="mensagem" placeholder="Digite sua mensagem..."></textarea>
+        <button id="btnWhatsApp">Enviar WhatsApp</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="scroll-reveal">
+    <p>&copy; 2025 • Victor Krieger • Todos os direitos reservados.</p>
+    <div class="footer-socials">
+      <a href="https://wa.me/5547989135878" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com/victorhkr._" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <small>Ilustração por <a href="https://storyset.com" target="_blank">Storyset</a></small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
